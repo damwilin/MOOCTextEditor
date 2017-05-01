@@ -17,7 +17,7 @@ public class DocumentBenchmarking {
 
 	    // Run each test more than once to get bigger numbers and less noise.
 	    // You can try playing around with this number.
-	    int trials = 100;
+		int trials = 300;
 
 	    // The text to test on
 	    String textfile = "data/warAndPeace.txt";
@@ -41,7 +41,7 @@ public class DocumentBenchmarking {
 				numToCheck += increment)
 		{
 			// numToCheck holds the number of characters that you should read from the 
-			// file to create both a BasicDocument and an EfficientDocument.  
+			// file to create both a BasicDocument and an EfficientDocument.
 			
 			/* Each time through this loop you should:
 			 * 1. Print out numToCheck followed by a tab (\t) (NOT a newline)
@@ -57,10 +57,28 @@ public class DocumentBenchmarking {
 			 *     b. Calls fleshScore on this document
 			 * 6. Print out the time it took to complete the loop in step 5 
 			 *      (on the same line as the first print statement) followed by a newline (\n) 
-			 */  
-			 
+			 */
+			System.out.print("\t" + numToCheck);
+			String text = getStringFromFile(textfile, numToCheck);
+			long startTimeBasic = System.nanoTime();
+			for (int i = 0; i < trials; i++) {
+				Document basicDocument = new BasicDocument(text);
+				basicDocument.getFleschScore();
+			}
+			long endTimeBasic = System.nanoTime();
+			double estTimeBasic = (endTimeBasic - startTimeBasic) / 1000000000.0;
+			System.out.print("\t" + estTimeBasic);
+
+			long startTimeEfficient = System.nanoTime();
+			for (int i = 0; i < trials; i++) {
+				Document efficientDocument = new EfficientDocument(text);
+				efficientDocument.getFleschScore();
+			}
+			long endTimeEfficient = System.nanoTime();
+			double estTimeEfficient = (endTimeEfficient - startTimeEfficient) / 1000000000.0;
+			System.out.print("\t" + estTimeEfficient + "\n");
 		}
-	
+
 	}
 	
 	/** Get a specified number of characters from a text file
