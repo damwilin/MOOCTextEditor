@@ -22,7 +22,8 @@ public class MyLinkedListTester {
 	MyLinkedList<Integer> emptyList;
 	MyLinkedList<Integer> longerList;
 	MyLinkedList<Integer> list1;
-	
+	MyLinkedList<Integer> list2;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -42,7 +43,11 @@ public class MyLinkedListTester {
 		list1.add(65);
 		list1.add(21);
 		list1.add(42);
-		
+
+		list2 = new MyLinkedList<Integer>();
+		list2.add(20);
+		list2.add(30);
+		list2.add(12);
 	}
 
 	
@@ -63,7 +68,6 @@ public class MyLinkedListTester {
 		}
 		
 		// test short list, first contents, then out of bounds
-		System.out.println(shortList.size());
 		assertEquals("Check first", "A", shortList.get(0));
 		assertEquals("Check second", "B", shortList.get(1));
 		
@@ -124,8 +128,19 @@ public class MyLinkedListTester {
 	@Test
 	public void testAddEnd()
 	{
-        // TODO: implement this test
-		
+		int a = 99;
+		int lastBeforeAdd = list2.get(list2.size() - 1);
+		list2.add(a);
+		assertEquals("Add: check a is correct", (Integer) a, list2.get(list2.size() - 1));
+		assertEquals("Add: check size is correct", 4, list2.size());
+		assertEquals("Add: check a -1", (Integer) lastBeforeAdd, list2.get(list2.size() - 2));
+
+		try {
+			list2.get(4);
+			fail("Check out of bounds");
+		} catch (IndexOutOfBoundsException e) {
+
+		}
 	}
 
 	
