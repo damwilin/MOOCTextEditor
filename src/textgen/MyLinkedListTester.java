@@ -148,8 +148,8 @@ public class MyLinkedListTester {
 	@Test
 	public void testSize()
 	{
-		// TODO: implement this test
-	}
+        assertEquals("Size: long list", LONG_LIST_LENGTH, longerList.size());
+    }
 
 	
 	
