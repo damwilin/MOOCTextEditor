@@ -63,6 +63,7 @@ public class MyLinkedListTester {
 		}
 		
 		// test short list, first contents, then out of bounds
+		System.out.println(shortList.size());
 		assertEquals("Check first", "A", shortList.get(0));
 		assertEquals("Check second", "B", shortList.get(1));
 		
