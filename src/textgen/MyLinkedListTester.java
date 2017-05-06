@@ -23,6 +23,7 @@ public class MyLinkedListTester {
 	MyLinkedList<Integer> longerList;
 	MyLinkedList<Integer> list1;
 	MyLinkedList<Integer> list2;
+    MyLinkedList<Integer> list3;
 
 	/**
 	 * @throws java.lang.Exception
@@ -48,7 +49,12 @@ public class MyLinkedListTester {
 		list2.add(20);
 		list2.add(30);
 		list2.add(12);
-	}
+
+        list3 = new MyLinkedList<Integer>();
+        list3.add(2);
+        list3.add(5);
+        list3.add(7);
+    }
 
 	
 	/** Test if the get method is working correctly.
@@ -161,8 +167,14 @@ public class MyLinkedListTester {
 	public void testAddAtIndex()
 	{
         // TODO: implement this test
-		
-	}
+        int aBefore = list3.get(0);
+        int index = 0;
+        int a = 9;
+        list3.add(0, 9);
+        assertEquals("AddAtIndex: Check a is correct", (Integer) a, list3.get(0));
+        assertEquals("AddAtIndex: Check a+1 is correct", (Integer) aBefore, list3.get(1));
+        assertEquals("AddAtIndex: Check size is correct", 4, list3.size());
+    }
 	
 	/** Test setting an element in the list */
 	@Test
