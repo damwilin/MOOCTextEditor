@@ -166,14 +166,13 @@ public class MyLinkedListTester {
 	@Test
 	public void testAddAtIndex()
 	{
-        // TODO: implement this test
-        int aBefore = list3.get(0);
-        int index = 0;
-        int a = 9;
-        list3.add(0, 9);
-        assertEquals("AddAtIndex: Check a is correct", (Integer) a, list3.get(0));
-        assertEquals("AddAtIndex: Check a+1 is correct", (Integer) aBefore, list3.get(1));
-        assertEquals("AddAtIndex: Check size is correct", 4, list3.size());
+		int aBefore = list3.get(1);
+		int index = 1;
+		int a = 9;
+		list3.add(1, 9);
+		assertEquals("AddAtIndex: Check a is correct", (Integer) a, list3.get(1));
+		assertEquals("AddAtIndex: Check a+1 is correct", (Integer) aBefore, list3.get(2));
+		assertEquals("AddAtIndex: Check size is correct", 4, list3.size());
     }
 	
 	/** Test setting an element in the list */

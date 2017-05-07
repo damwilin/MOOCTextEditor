@@ -79,7 +79,27 @@ public class MyLinkedList<E> extends AbstractList<E> {
      * @param element The element to add
      */
     public void add(int index, E element) {
-        // TODO: Implement this method
+        if (element == null)
+            throw new NullPointerException();
+        if (index < 0 || index > size - 1)
+            throw new IndexOutOfBoundsException();
+        LLNode<E> toAdd = new LLNode<E>(element);
+        if (index == size - 1) {
+            toAdd.prev = tail.prev;
+            tail.prev.next = toAdd;
+            toAdd.next = tail;
+            tail.prev = toAdd;
+        } else {
+            LLNode<E> temp = head.next;
+            for (int i = 0; i < index; i++) {
+                temp = temp.next;
+            }
+            toAdd.next = temp;
+            toAdd.prev = temp.prev;
+            temp.prev.next = toAdd;
+            temp.prev = toAdd;
+        }
+        size++;
     }
 
 
