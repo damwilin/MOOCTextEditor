@@ -81,7 +81,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
     public void add(int index, E element) {
         if (element == null)
             throw new NullPointerException();
-        if (index < 0 || index > size - 1)
+        if (index < 0 || index > size)
             throw new IndexOutOfBoundsException();
         LLNode<E> toAdd = new LLNode<E>(element);
         if (index == size - 1) {
@@ -118,7 +118,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
      * @throws IndexOutOfBoundsException If index is outside the bounds of the list
      */
     public E remove(int index) {
-        if (index > size - 1)
+        if (index > size - 1 || index < 0)
             throw new IndexOutOfBoundsException();
         LLNode<E> temp = head.next;
         for (int i = 0; i < index; i++)
@@ -140,7 +140,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
     public E set(int index, E element) {
         if (element == null)
             throw new NullPointerException();
-        if (index > size - 1)
+        if (index > size - 1 || index < 0)
             throw new IndexOutOfBoundsException();
         LLNode<E> temp = head.next;
         for (int i = 0; i < index; i++)
