@@ -24,6 +24,7 @@ public class MyLinkedListTester {
 	MyLinkedList<Integer> list1;
 	MyLinkedList<Integer> list2;
     MyLinkedList<Integer> list3;
+	MyLinkedList<Integer> listSet;
 
 	/**
 	 * @throws java.lang.Exception
@@ -54,7 +55,12 @@ public class MyLinkedListTester {
         list3.add(2);
         list3.add(5);
         list3.add(7);
-    }
+
+		listSet = new MyLinkedList<Integer>();
+		listSet.add(1);
+		listSet.add(2);
+		listSet.add(3);
+	}
 
 	
 	/** Test if the get method is working correctly.
@@ -179,8 +185,12 @@ public class MyLinkedListTester {
 	@Test
 	public void testSet()
 	{
-	    // TODO: implement this test
-	    
+		int value0 = 5;
+		listSet.set(0, value0);
+		int value1 = 10;
+		listSet.set(1, value1);
+		assertEquals("Set: Check value is correct:", (Integer) value0, listSet.get(0));
+		assertEquals("Set: Check value is correct:", (Integer) value1, listSet.get(1));
 	}
 	
 	
