@@ -25,7 +25,7 @@ public class DictionaryBST implements Dictionary {
         if (dict.contains(word))
             return false;
         dict.add(word);
-        return false;
+        return true;
     }
 
     /**
