@@ -1,5 +1,7 @@
 package spelling;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -57,7 +59,6 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
                 size++;
                 return true;
             }
-
         }
         return false;
     }
@@ -67,7 +68,6 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      * as the number of TrieNodes in the trie.
      */
     public int size() {
-
         return size;
     }
 
@@ -118,25 +118,59 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      */
     @Override
     public List<String> predictCompletions(String prefix, int numCompletions) {
-        // TODO: Implement this method
+        //    Create a list of completions to return (initially empty)
+        List<String> completionsList = new ArrayList<String>();
+        if (numCompletions == 0)
+            return completionsList;
         // This method should implement the following algorithm:
         // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an
         //    empty list
+        TrieNode stemNode = findNode(prefix);
+        if (stemNode == null)
+            return completionsList;
         // 2. Once the stem is found, perform a breadth first search to generate completions
         //    using the following algorithm:
         //    Create a queue (LinkedList) and add the node that completes the stem to the back
         //       of the list.
-        //    Create a list of completions to return (initially empty)
+        List<TrieNode> queue = new LinkedList();
+        queue.add(stemNode);
         //    While the queue is not empty and you don't have enough completions:
-        //       remove the first Node from the queue
-        //       If it is a word, add it to the completions list
-        //       Add all of its child nodes to the back of the queue
-        // Return the list of completions
+        while (!queue.isEmpty()) {
+            //       remove the first Node from the queue
+            TrieNode currRemove = queue.remove(0);
+            //       If it is a word, add it to the completions list
+            if (currRemove.endsWord())
+                completionsList.add(currRemove.getText());
 
+            if (completionsList.size() == numCompletions)
+                break;
+            Set<Character> validChars = currRemove.getValidNextCharacters();
+            //       Add all of its child nodes to the back of the queue
+            for (Character c : validChars)
+                queue.add(currRemove.getChild(c));
+        }
+        // Return the list of completions
+        return completionsList;
+    }
+
+    private TrieNode findNode(String word) {
+        if (word.isEmpty())
+            return root;
+        TrieNode currNode = root;
+        for (int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);
+            Set validChars = currNode.getValidNextCharacters();
+            if (validChars.contains(c)) {
+                currNode = currNode.getChild(c);
+                if (i == word.length() - 1)
+                    return currNode;
+            }
+        }
         return null;
     }
 
     // For debugging
+
     public void printTree() {
         printNode(root);
     }
